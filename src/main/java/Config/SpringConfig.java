@@ -12,12 +12,20 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.springframework.web.filter.CharacterEncodingFilter;
+
+import jakarta.servlet.Filter;
 
 
 
@@ -26,7 +34,6 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 @EnableWebMvc
 @ComponentScan(basePackages = {"Controllers", "Dao"})
 public class SpringConfig implements WebMvcConfigurer {
-
 
 
     private final ApplicationContext applicationContext;
@@ -42,6 +49,7 @@ public class SpringConfig implements WebMvcConfigurer {
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding("UTF-8"); // Установка UTF-8 для шаблонов
         return templateResolver;
     }
 
@@ -57,37 +65,22 @@ public class SpringConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
+        resolver.setCharacterEncoding("UTF-8"); // Устанавливаем UTF-8 для резолвера
         registry.viewResolver(resolver);
     }
 
-    // Бин для SessionFactory
-//    @Bean
-//    public SessionFactory sessionFactory() {
-//        try {
-//            // Создание конфигурации Hibernate
-//            org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration()
-//                    .configure("hibernate.cfg.xml")  // Чтение настроек из hibernate.cfg.xml
-//                    .addAnnotatedClass(Person.class)  // Добавляем аннотированные классы
-//                    .addAnnotatedClass(Book.class);
-//
-//            // Создание и конфигурирование ServiceRegistry
-//            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-//                    .applySettings(configuration.getProperties())  // Получаем свойства конфигурации
-//                    .build();
-//
-//            // Создаем и возвращаем SessionFactory
-//            return configuration.buildSessionFactory(serviceRegistry);
-//
-//        } catch (Throwable ex) {
-//            throw new ExceptionInInitializerError("Ошибка при создании SessionFactory: " + ex);
-//        }
-//    }
+    @Bean
+    public Filter characterEncodingFilter() {
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8");
+        filter.setForceEncoding(true);
+        return filter;
+    }
 
-    // Бин для TransactionManager
-//    @Bean
-//    public PlatformTransactionManager transactionManager() {
-//        return new HibernateTransactionManager(sessionFactory());
-//    }
+
+
+
+
 
 
 

@@ -4,9 +4,10 @@
         <!-- JDBC Database connection settings -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/project1</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/project1?useUnicode=true&amp;characterEncoding=UTF-8</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">postgres</property>
+
 
         <!-- JDBC connection pool settings -->
         <property name="hibernate.c3p0.min_size">5</property>
@@ -14,6 +15,11 @@
         <property name="hibernate.c3p0.timeout">300</property>
         <property name="hibernate.c3p0.max_statements">50</property>
         <property name="hibernate.c3p0.idle_test_period">3000</property>
+
+        <!-- Ensure proper encoding for Cyrillic -->
+        <property name="hibernate.connection.useUnicode">true</property>
+        <property name="hibernate.connection.characterEncoding">UTF-8</property>
+        <property name="hibernate.connection.charSet">UTF-8</property>
 
 
 
