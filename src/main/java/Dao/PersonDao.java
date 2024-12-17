@@ -20,25 +20,6 @@ public class PersonDao {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonDao.class);
 
-    //    public PersonDao() {
-//        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-//                .configure("hibernate.cfg.xml")
-//                .build();
-//
-//        try {
-//            sessionFactory = new MetadataSources(registry)
-//                    .addAnnotatedClass(Person.class)
-//                    .addAnnotatedClass(Book.class)
-//                    .buildMetadata()
-//                    .buildSessionFactory();
-//        } catch (Exception e) {
-//            StandardServiceRegistryBuilder.destroy(registry);
-//            e.printStackTrace();
-//            throw new RuntimeException("Ошибка инициализации SessionFactory", e);
-//        }
-//    }
-
-
 
     //получение всех людей
     public List<Person> getAllPeoples() {
