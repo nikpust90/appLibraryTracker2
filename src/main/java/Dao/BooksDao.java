@@ -108,7 +108,27 @@ public class BooksDao {
             if (book == null) {
                 throw new IllegalArgumentException("Книга с ID " + bookId + " не найдена");
             }
+            //назначаем читателя по колонке owner в текущей строке
             book.setOwner(person);
+            session.update(book);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            logger.error("Ошибка при назначении книги", e);
+            throw new RuntimeException("Ошибка при назначении книги", e);
+        }
+    }
+
+    // удаляем книгу у читателя
+    public void deleteBookToPerson(UUID bookId) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            Book book = session.get(Book.class, bookId);
+            if (book == null) {
+                throw new IllegalArgumentException("Книга с ID " + bookId + " не найдена");
+            }
+            //удаляем читателя по колонке owner в текущей строке
+            book.setOwner(null);
             session.update(book);
             session.getTransaction().commit();
         } catch (Exception e) {

@@ -84,9 +84,9 @@ public class BooksController {
     public String editBook(@PathVariable("id") UUID id, Model model) {
         Book bookToBeEdited = booksDao.getBookById(id);
         model.addAttribute("Book", bookToBeEdited);
-        if (bookToBeEdited.getOwner() != null) {
-            model.addAttribute("keyPeoples", bookToBeEdited.getOwner());
-        }
+//        if (bookToBeEdited.getOwner() != null) {
+//            model.addAttribute("keyPeoples", bookToBeEdited.getOwner());
+//        }
         return "books/view-to-edit-book";
     }
 
@@ -110,10 +110,19 @@ public class BooksController {
         return "redirect:/books";
     }
 
+    // назначение книги читателю
     @PostMapping("/assign/{id}")
     public String assignBook(@PathVariable("id") UUID bookId, @RequestParam("personId") UUID personId) {
         Person person = personDao.getPersonById(personId);
         booksDao.assignBookToPerson(bookId, person);
+        return "redirect:/books/" + bookId;
+    }
+
+    // удаляем книгу у читателя
+    @PostMapping("/loose/{id}")
+    public String looseBook(@PathVariable("id") UUID bookId) {
+        //Person person = personDao.getPersonById(personId);
+        booksDao.deleteBookToPerson(bookId);
         return "redirect:/books/" + bookId;
     }
 }

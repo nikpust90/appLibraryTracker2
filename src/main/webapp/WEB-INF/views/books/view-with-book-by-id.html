@@ -21,6 +21,12 @@
 <!-- Если книга уже назначена -->
 <div th:if="${keyBookById.owner != null}">
   <p><strong>Книга сейчас у:</strong> <span th:text="${keyBookById.owner.getFullName()}">Имя человека</span></p>
+  <form th:method="post"
+        th:action="@{/books/loose/{id}(id=${keyBookById.getId()})}">
+
+    <input type="submit" value="Освободить книгу" />
+
+  </form>
 </div>
 
 <!-- Если книга свободна -->

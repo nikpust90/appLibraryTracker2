@@ -7,8 +7,8 @@
 <body>
 
 <form th:method="post"
-      th:action="@{/books/edit/{id}(id=${keyOfBookToBeEdited.getId()})}"
-      th:object="${keyOfBookToBeEdited}">
+      th:action="@{/books/edit/{id}(id=${Book.getId()})}"
+      th:object="${Book}">
   <label for="titleOfInput">Введите название книги</label>
   <input type="text" id="titleOfInput" th:field="*{title}" />
   <div class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
