@@ -15,7 +15,7 @@
     <java.version>17</java.version>
     <spring.version>6.1.4</spring.version>
     <hibernate.version>6.2.13.Final</hibernate.version>
-    <jakarta.version>3.0.0</jakarta.version>
+    <jakarta.version>3.1.0</jakarta.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -121,6 +121,17 @@
     <version>3.8.1</version>
     <scope>test</scope>
   </dependency>
+
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>3.0.1</version>
+    </dependency>
   </dependencies>
 
   <build>
