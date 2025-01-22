@@ -64,7 +64,7 @@ public class PeopleController {
 
     //получение человека по id GET
     @GetMapping("/{id}")
-    public String getPersonById(@PathVariable("id") UUID id, Model model) {
+    public String getPersonById(@PathVariable("id") long id, Model model) {
 
         Person personById = personDao.getPersonById(id);
         model.addAttribute("keyPersonById", personById);
@@ -74,7 +74,7 @@ public class PeopleController {
 
     //редактирование человека по id GET
     @GetMapping("/edit/{id}")
-    public String editPerson(@PathVariable("id") UUID id, Model model) {
+    public String editPerson(@PathVariable("id") long id, Model model) {
         Person personToBeEdited = personDao.getPersonById(id);
         model.addAttribute("keyOfPersonToBeEdited", personToBeEdited);
         return "people/view-to-edit-person";
@@ -82,7 +82,7 @@ public class PeopleController {
 
     //редактирование человека по id POST
     @PostMapping("/edit/{id}")
-    public String editPerson(@PathVariable("id") UUID id,
+    public String editPerson(@PathVariable("id") long id,
                              @ModelAttribute("keyOfPersonToBeEdited") @Valid Person personFromForm,
 
                              BindingResult bindingResult) {
@@ -95,7 +95,7 @@ public class PeopleController {
 
     //удаление человека по id DELETE
     @PostMapping("/delete/{id}")
-    public String deletePerson(@PathVariable("id") UUID id) {
+    public String deletePerson(@PathVariable("id") long id) {
         personDao.deletePerson(id);
         return "redirect:/people";
     }

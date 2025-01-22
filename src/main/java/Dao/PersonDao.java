@@ -48,7 +48,7 @@ public class PersonDao {
     }
 
     //получение человека по id
-    public Person getPersonById(UUID id) {
+    public Person getPersonById(long id) {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             Person person = session.get(Person.class, id);
@@ -73,7 +73,7 @@ public class PersonDao {
     }
 
     //удаление человека
-    public void deletePerson(UUID id) {
+    public void deletePerson(long id) {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();

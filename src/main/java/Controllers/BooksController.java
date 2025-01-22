@@ -70,7 +70,7 @@ public class BooksController {
 
     //получение книги по id GET
     @GetMapping("/{id}")
-    public String getBookById(@PathVariable("id") UUID id, Model model) {
+    public String getBookById(@PathVariable("id") long id, Model model) {
 
         Book bookById = booksDao.getBookById(id);
         model.addAttribute("keyBookById", bookById);
@@ -81,7 +81,7 @@ public class BooksController {
 
     //редактирование книги по id GET
     @GetMapping("/edit/{id}")
-    public String editBook(@PathVariable("id") UUID id, Model model) {
+    public String editBook(@PathVariable("id") long id, Model model) {
         Book bookToBeEdited = booksDao.getBookById(id);
         model.addAttribute("Book", bookToBeEdited);
 //        if (bookToBeEdited.getOwner() != null) {
@@ -92,7 +92,7 @@ public class BooksController {
 
     //редактирование книги по id POST
     @PostMapping("/edit/{id}")
-    public String editBook(@PathVariable("id") UUID id,
+    public String editBook(@PathVariable("id") long id,
                              @ModelAttribute("keyOfBookToBeEdited") @Valid Book bookFromForm,
 
                              BindingResult bindingResult) {
@@ -105,14 +105,14 @@ public class BooksController {
 
     //удаление книги по id DELETE
     @PostMapping("/delete/{id}")
-    public String deleteBook(@PathVariable("id") UUID id) {
+    public String deleteBook(@PathVariable("id") long id) {
         booksDao.deleteBook(id);
         return "redirect:/books";
     }
 
     // назначение книги читателю
     @PostMapping("/assign/{id}")
-    public String assignBook(@PathVariable("id") UUID bookId, @RequestParam("personId") UUID personId) {
+    public String assignBook(@PathVariable("id") long bookId, @RequestParam("personId") long personId) {
         Person person = personDao.getPersonById(personId);
         booksDao.assignBookToPerson(bookId, person);
         return "redirect:/books/" + bookId;
@@ -120,7 +120,7 @@ public class BooksController {
 
     // удаляем книгу у читателя
     @PostMapping("/loose/{id}")
-    public String looseBook(@PathVariable("id") UUID bookId) {
+    public String looseBook(@PathVariable("id") long bookId) {
         //Person person = personDao.getPersonById(personId);
         booksDao.deleteBookToPerson(bookId);
         return "redirect:/books/" + bookId;

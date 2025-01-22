@@ -61,7 +61,7 @@ public class BooksDao {
     }
 
     //получение объекта book по id
-    public Book getBookById(UUID id) {
+    public Book getBookById(long id) {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             Book book = session.get(Book.class, id);
@@ -86,7 +86,7 @@ public class BooksDao {
     }
 
     //удаление объекта book
-    public void deleteBook(UUID id) {
+    public void deleteBook(long id) {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
@@ -100,7 +100,7 @@ public class BooksDao {
     }
 
     // назначение книги читателю
-    public void assignBookToPerson(UUID bookId, Person person) {
+    public void assignBookToPerson(long bookId, Person person) {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
@@ -119,7 +119,7 @@ public class BooksDao {
     }
 
     // удаляем книгу у читателя
-    public void deleteBookToPerson(UUID bookId) {
+    public void deleteBookToPerson(long bookId) {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
